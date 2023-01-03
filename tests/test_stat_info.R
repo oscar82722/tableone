@@ -1,4 +1,4 @@
-source("../src/stat_info_util.R", chdir = TRUE)
+source("../src/stat_info.R", chdir = TRUE)
 library(testthat)
 
 

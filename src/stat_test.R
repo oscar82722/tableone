@@ -1,13 +1,5 @@
 library(data.table)
 
-set.seed(123)
-x1 <- c(rnorm(50, 0, 1), rnorm(50, 2, 1))
-x2 <- c(rnorm(50, 0, 1), rnorm(50, 0, 1))
-y1 <- c(rep('a', 50), rep('b', 50))
-y2 <- c(rep('a', 50), rep('b', 50), rep('c', 50), rep('d', 50))
-y3 <- c(rep('a', 3), rep('b', 97))
-df <- data.table(x1, x2, y1, y2, y3)
-
 
 customize_aov <- function(formula, df){
   test_res <- aov(formula, df)

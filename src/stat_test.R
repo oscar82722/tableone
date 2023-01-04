@@ -75,11 +75,11 @@ judge_test_name <- function(df, group_col, value_col){
 
 stat_test <- function(df, group_col, value_col){
   
-  test_name <- judge_test_name(df, group_col, value_col)
+  method <- judge_test_name(df, group_col, value_col)
   
   p.value <- c()
-  for(t_n in test_name){
-    func_ <- test_dict[[t_n]]
+  for(m in method){
+    func_ <- test_dict[[m]]
     f <- as.formula(paste0(value_col, '~', group_col))
     test_res <- func_(f, df)
     
@@ -87,15 +87,7 @@ stat_test <- function(df, group_col, value_col){
     p <- ifelse(p < 0.001, '<0.001', as.character(round(p,3)))
     p.value <- c(p.value, p)
   }
-  res <- data.table(test_name, p.value)
+  res <- data.table(method, p.value)
   return(res)
 }
-
-
-
-
-
-
-
-
 

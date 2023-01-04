@@ -73,7 +73,7 @@ judge_test_name <- function(df, group_col, value_col){
 }
 
 
-stat_test <- function(df, group_col, value_col){
+get_stat_test <- function(df, group_col, value_col){
   
   method <- judge_test_name(df, group_col, value_col)
   

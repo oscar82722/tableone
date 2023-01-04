@@ -41,7 +41,7 @@ test_that("stat_info_numeric", {
   res <- c('[1,5]', '1(12.5%)')
   res <- data.table(Item, res)
 
-  expect_equal(stat_info(x=x,run_stat_byclass_dict=run_stat_byclass_dict), res)
+  expect_equal(get_stat_info(x=x,run_stat_byclass_dict=run_stat_byclass_dict), res)
 })
 
 
@@ -58,7 +58,7 @@ test_that("stat_info_character", {
   res <- c('2(50%)', '2(50%)', '1(20%)')
   res <- data.table(Item, res)
   
-  expect_equal(stat_info(x=x,run_stat_byclass_dict=run_stat_byclass_dict), res)
+  expect_equal(get_stat_info(x=x,run_stat_byclass_dict=run_stat_byclass_dict), res)
 })
 
 

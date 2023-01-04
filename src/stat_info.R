@@ -47,10 +47,10 @@ stat_info_func_dict = list(
 )
 
 
-stat_info <- function(x,
-                      run_stat_byclass_dict = list(
-                        numeric = c('Mean(sd)', 'Median(IQR)', '[Min,Max]', 'N/A'),
-                        character = c('percent_by_element', 'N/A'))
+get_stat_info <- function(x,
+                          run_stat_byclass_dict = list(
+                          numeric = c('Mean(sd)', 'Median(IQR)', '[Min,Max]', 'N/A'),
+                          character = c('percent_by_element', 'N/A'))
                       ){
   
   variable_class = class(x)
@@ -70,20 +70,5 @@ stat_info <- function(x,
   }
   return(res_tb)
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -44,7 +44,7 @@ test_that("judge_test_name_case3", {
 
 
 test_that("stat_test", {
-  expect_equal(colnames(stat_test(df, 'y1', 'x1')), c("method", "p.value"))
+  expect_equal(colnames(get_stat_test(df, 'y1', 'x1')), c("method", "p.value"))
 })
 
 

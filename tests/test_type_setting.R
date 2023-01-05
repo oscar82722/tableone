@@ -24,7 +24,7 @@ test_that("type_setting_v1_numeric", {
                    method = c(NA, 't_test', 'wilcox_test', NA, NA),
                    overall =c(NA, 'o1', 'o2', 'o3', 'o4'))
   
-  expect_equal(type_setting_v1(var, stat_info_tb, stat_test_tb), res)
+  expect_equal(run_type_setting(var, stat_info_tb, stat_test_tb, type='type1'), res)
   
 })
 
@@ -49,5 +49,23 @@ test_that("type_setting_v1_character", {
                     method = c('fisher_test', NA, NA, NA, NA),
                     overall =c(NA, 'o1', 'o2', 'o3', 'o4'))
   
-  expect_equal(type_setting_v1(var, stat_info_tb, stat_test_tb), res)
+  expect_equal(run_type_setting(var, stat_info_tb, stat_test_tb, type='type1'), res)
 })
+
+
+test_that("type_setting_v1_none_test", {
+  Item <- c('g1', 'g2', 'g3', 'N/A')
+  res1 <- c('1', '2', '3', '4')
+  res2 <- c('21', '22', '23', '24')
+  overall <- c('o1', 'o2', 'o3', 'o4')
+  stat_info_tb <- data.table(Item, res1, res2, overall)
+  
+  stat_test_tb <- ''
+  var <- 'v1'
+  
+  res <- data.table(var = c(var, NA, NA, NA, NA),
+                    overall =c(NA, 'o1', 'o2', 'o3', 'o4'))
+  
+  expect_equal(run_type_setting(var, stat_info_tb, stat_test_tb, type='type1'), res)
+})
+

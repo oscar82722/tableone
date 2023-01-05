@@ -8,7 +8,8 @@
 |2022/01/05 | add create_tableone.R and test_create_tableone.R|
 |2022/01/05 | complete version 1.|
 
-TODO
+# TODO
 
-|check|item|
+|check |item |
+|  ----  | ----  |
 |     | refactor tableone|

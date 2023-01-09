@@ -62,6 +62,62 @@ test_that("stat_info_character", {
 })
 
 
+test_that("stat_info_bygroup_numeric", {
+  set.seed(123)
+  x <- c(rnorm(99, 0, 1), NA)
+  g <- c(rep('a',50), rep('b',50))
+  df <- data.table(x,g)
+  run_stat_byclass_dict = list(
+    numeric = c('[Min,Max]', 'N/A')
+  )
+  
+  # result
+  Item <- c('[Min,Max]', 'N/A')
+  col2 <- c('[-2.31,2.19]', '1(1%)')
+  col3 <- c('[-1.97,2.17]', '0(0%)')
+  col4 <- c('[-2.31,2.19]', '1(2%)')
+  res <- data.table(Item, col2, col3, col4)
+  colnames(res) <- c('Item', 'overall(N=100)', 'a(N=50)', 'b(N=50)')
+  
+  expect_equal(get_stat_info_bygroup(df=df,
+                                     var='x',
+                                     group='g',
+                                     run_stat_byclass_dict=run_stat_byclass_dict), res)
+})
 
 
+test_that("stat_info_bygroup_character", {
+  x <- c(rep('a',24), NA, rep('b',50), rep('c',25))
+  g <- c(rep('a',50), rep('b',50))
+  df <- data.table(x,g)
+  
+  # result
+  Item <- c('a', 'b', 'c', 'N/A')
+  col2 <- c('24(24.24%)', '50(50.51%)', '25(25.25%)', '1(1%)')
+  col3 <- c('24(48.98%)', '25(51.02%)', '0(0%)', '1(2%)')
+  col4 <- c('0(0%)', '25(50%)', '25(50%)', '0(0%)')
+  res <- data.table(Item, col2, col3, col4)
+  colnames(res) <- c('Item', 'overall(N=100)', 'a(N=50)', 'b(N=50)')
+  
+  expect_equal(get_stat_info_bygroup(df=df,
+                                     var='x',
+                                     group='g'), res)
+})
+
+
+test_that("stat_info_bygroup_nogroup", {
+  x <- c(rep('a',24), NA, rep('b',50), rep('c',25))
+  g <- c(rep('a',50), rep('b',50))
+  df <- data.table(x,g)
+  
+  # result
+  Item <- c('a', 'b', 'c', 'N/A')
+  col2 <- c('24(24.24%)', '50(50.51%)', '25(25.25%)', '1(1%)')
+  res <- data.table(Item, col2)
+  colnames(res) <- c('Item', 'overall(N=100)')
+  
+  expect_equal(get_stat_info_bygroup(df=df,
+                                     var='x',
+                                     group=''), res)
+})
 

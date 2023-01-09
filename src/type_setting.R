@@ -31,13 +31,15 @@ type_setting_v1 <- function(var, stat_info_tb, stat_test_tb){
   p.value_col <- c('chi_test', 'fisher_test')
   
   # check final column
-  var_element <- colnames(stat_info_tb)[!(colnames(stat_info_tb) %in% c('overall'))]
+  overall_col <- colnames(stat_info_tb)[grepl('overall', colnames(stat_info_tb))]
+  var_element <- colnames(stat_info_tb)[!(colnames(stat_info_tb) %in% overall_col)]
+  
   if(is.character(stat_test_tb)){
-    col_final <- c('var', 'overall')
+    col_final <- c('var', overall_col)
     first_row <- data.table(var)
     info_and_test <- stat_info_tb
   }else{
-    col_final <- c('var', var_element, 'p.value', 'method', 'overall')
+    col_final <- c('var', var_element, 'p.value', 'method', overall_col)
     # first part (title)
     p.value <- stat_test_tb[ method %in% p.value_col, p.value]
     method <- stat_test_tb[ method %in% p.value_col,  method]

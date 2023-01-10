@@ -115,7 +115,7 @@ get_stat_info_bygroup <- function(df,
   tb_res_u <- tb_res_u[order(match(Item, var_rank))]
   
   # fill na
-  if(class(df[,get(var)]) == 'character'){
+  if(class(df[,value_col]) == 'character'){
     tb_res_u = replace(tb_res_u, is.na(tb_res_u), "0(0%)")
   }
   

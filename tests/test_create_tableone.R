@@ -1,17 +1,17 @@
 source("../create_tableone.R", chdir = TRUE)
 library(testthat)
 
-set.seed(123)
-x1 <- c(rnorm(50, 0, 1), rnorm(50, 2, 1))
-x2 <- c(rnorm(99, 2, 0.5),NA)
-y1 <- c(rep('a', 50), rep('b', 50))
-y2 <- c(rep('a', 50), rep('b', 50), rep('c', 50), rep('d', 50))
-y3 <- c(rep('a', 3), rep('b', 97))
-y4 <- c(rep(c('a', 'b'),25), rep(c('a', 'b'),24), NA, NA)
-df <- data.table(x1, x2, y1, y2, y3, y4)
-
 
 test_that("create_tableone_group=None", {
+  set.seed(123)
+  x1 <- c(rnorm(50, 0, 1), rnorm(50, 2, 1))
+  x2 <- c(rnorm(99, 2, 0.5),NA)
+  y1 <- c(rep('a', 50), rep('b', 50))
+  y2 <- c(rep('a', 50), rep('b', 50), rep('c', 50), rep('d', 50))
+  y3 <- c(rep('a', 3), rep('b', 97))
+  y4 <- c(rep(c('a', 'b'),25), rep(c('a', 'b'),24), NA, NA)
+  df <- data.table(x1, x2, y1, y2, y3, y4)
+  
   var <- c('x1', '', '', '', '',
            'x2', '', '', '', '')
   overall <- c('', '1.09(1.4)', '1.22(2.29)', '[-1.97,4.19]', '0(0%)',
@@ -27,6 +27,15 @@ test_that("create_tableone_group=None", {
 
 
 test_that("create_tableone_group_two", {
+  set.seed(123)
+  x1 <- c(rnorm(50, 0, 1), rnorm(50, 2, 1))
+  x2 <- c(rnorm(99, 2, 0.5),NA)
+  y1 <- c(rep('a', 50), rep('b', 50))
+  y2 <- c(rep('a', 50), rep('b', 50), rep('c', 50), rep('d', 50))
+  y3 <- c(rep('a', 3), rep('b', 97))
+  y4 <- c(rep(c('a', 'b'),25), rep(c('a', 'b'),24), NA, NA)
+  df <- data.table(x1, x2, y1, y2, y3, y4)
+  
   var <- c('x2', '', '', '', '',
            'y4', '', '', '')
   Item <- c('' , 'Mean(sd)', 'Median(IQR)', '[Min,Max]', 'N/A',
@@ -57,6 +66,15 @@ test_that("create_tableone_group_two", {
 
 
 test_that("create_tableone_group_multi", {
+  set.seed(123)
+  x1 <- c(rnorm(50, 0, 1), rnorm(50, 2, 1))
+  x2 <- c(rnorm(99, 2, 0.5),NA)
+  y1 <- c(rep('a', 50), rep('b', 50))
+  y2 <- c(rep('a', 50), rep('b', 50), rep('c', 50), rep('d', 50))
+  y3 <- c(rep('a', 3), rep('b', 97))
+  y4 <- c(rep(c('a', 'b'),25), rep(c('a', 'b'),24), NA, NA)
+  df <- data.table(x1, x2, y1, y2, y3, y4)
+  
   var <- c('x1', '', '', '', '',
            'y3', '', '', '')
   Item <- c('' , 'Mean(sd)', 'Median(IQR)', '[Min,Max]', 'N/A',

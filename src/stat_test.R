@@ -1,5 +1,5 @@
 library(data.table)
-
+library(smd)
 
 customize_aov <- function(formula, df){
   test_res <- aov(formula, df)
@@ -29,13 +29,28 @@ customize_fisher_test <- function(formula, df){
   return(res)
 }
 
+
+customize_smd <- function(formula, df){
+  if(df[,length(unique(get(col[2])))] == 2){
+    col <- as.character(formula)[2:3]
+    res <- smd(x = unlist(df[,col[1],with=F]), g = unlist(df[,col[2],with=F]))
+    p <- res$estimate
+  }else{
+    p <- ''
+  }
+  res <- list(p.value = p)
+  return(res)
+}
+
+
 test_dict = list(
   t_test = t.test,
   wilcox_test = wilcox.test,
   aov_test = customize_aov,
   ks_test = kruskal.test,
   chi_test = customize_chi_test,
-  fisher_test = customize_fisher_test
+  fisher_test = customize_fisher_test,
+  smd = customize_smd
 )
 
 
@@ -68,6 +83,13 @@ judge_test_name <- function(df, group_col, value_col){
       test_func <- c(test_func, 'chi_test')
     }
   }
+  
+  
+  group_n <- df[,length(unique(get(group_col)))]
+  if(group_n == 2){
+      test_func <- c(test_func, 'smd')
+  }
+  
   
   return(test_func)
 }

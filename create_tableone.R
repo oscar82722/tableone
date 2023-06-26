@@ -21,7 +21,7 @@ create_tableone <- function(df, group, variable, type='type1'){
       df_temp <- df_temp[complete.cases(df_temp)]
       
       # get test result
-      stat_test_tb <- get_stat_test(df_temp,
+      stat_test_tb <- get_stat_test(df=df_temp,
                                     group_col=group,
                                     value_col=var)
     }

@@ -39,13 +39,15 @@ type_setting_v1 <- function(var, stat_info_tb, stat_test_tb){
     first_row <- data.table(var)
     info_and_test <- stat_info_tb
   }else{
-    col_final <- c('var', var_element, 'p.value', 'method', overall_col)
+    col_final <- c('var', var_element, 'p.value', 'method', overall_col, 'smd')
     # first part (title)
     p.value <- stat_test_tb[ method %in% p.value_col, p.value]
     method <- stat_test_tb[ method %in% p.value_col,  method]
+    smd_v <- stat_test_tb[ method == 'smd',  p.value]
     first_row <- data.table(var,
                             p.value= ifelse(length(p.value) == 0, NA, p.value),
-                            method = ifelse(length(method) == 0, NA, method))
+                            method = ifelse(length(method) == 0, NA, method),
+                            smd = smd_v)
     # second part (info and test)
     stat_info_tb[,obs:=1:.N]
     info_and_test <- merge(stat_test_tb, map_tb, all.x=T)
